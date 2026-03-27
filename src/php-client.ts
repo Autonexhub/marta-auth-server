@@ -42,7 +42,7 @@ export class PhpClient {
         throw new Error(`Failed to get user: ${response.status}`);
       }
 
-      const data: PhpApiResponse<PhpUser> = await response.json();
+      const data = await response.json() as PhpApiResponse<PhpUser>;
 
       if (!data.success || !data.data) {
         console.error(`[PhpClient] Invalid response:`, data);
@@ -81,7 +81,7 @@ export class PhpClient {
         throw new Error(`Failed to create user: ${response.status}`);
       }
 
-      const data: PhpApiResponse<PhpUser> = await response.json();
+      const data = await response.json() as PhpApiResponse<PhpUser>;
 
       if (!data.success || !data.data) {
         console.error(`[PhpClient] Invalid response:`, data);

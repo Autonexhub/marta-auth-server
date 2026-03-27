@@ -34,7 +34,9 @@ const server = createServer(async (req, res) => {
 
   // All /api/auth/* routes go to better-auth
   if (req.url?.startsWith("/api/auth")) {
-    return auth.handler()(req, res);
+    // @ts-ignore - better-auth handler types
+    auth.handler(req, res);
+    return;
   }
 
   // Root endpoint

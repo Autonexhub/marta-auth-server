@@ -48,3 +48,33 @@ export type OAuthProvider = "google" | "github" | "microsoft";
  * Auth provider type (includes magic link and email)
  */
 export type AuthProvider = OAuthProvider | "email" | "magic_link";
+
+/**
+ * Better-Auth user object
+ */
+export interface BetterAuthUser {
+  id: string;
+  email: string;
+  name?: string;
+  image?: string;
+  emailVerified?: boolean;
+}
+
+/**
+ * Better-Auth account object
+ */
+export interface BetterAuthAccount {
+  provider: string;
+  providerAccountId: string;
+  type: string;
+}
+
+/**
+ * Better-Auth session object
+ */
+export interface BetterAuthSession {
+  id: string;
+  userId: string;
+  expiresAt: Date;
+  token: string;
+}

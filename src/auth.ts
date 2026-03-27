@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { env, getBaseUrl } from "./env";
 import { phpClient } from "./php-client";
-import type { PhpUser } from "./types";
+import type { PhpUser, BetterAuthUser, BetterAuthAccount, BetterAuthSession } from "./types";
 
 /**
  * Better-Auth Configuration
@@ -63,7 +63,7 @@ export const auth = betterAuth({
      * Called after successful sign-in (OAuth or magic link)
      * We sync user with PHP backend here
      */
-    async signIn({ user, account }) {
+    async signIn({ user, account }: { user: BetterAuthUser; account: BetterAuthAccount | null }) {
       try {
         console.log("[Better-Auth] Sign-in callback triggered");
         console.log("[Better-Auth] User:", user.email);
@@ -93,7 +93,7 @@ export const auth = betterAuth({
      * Called when creating a session
      * We enrich session data with PHP user info
      */
-    async session({ session, user }) {
+    async session({ session, user }: { session: BetterAuthSession; user: BetterAuthUser }) {
       try {
         console.log("[Better-Auth] Session callback for user:", user.email);
 
@@ -135,7 +135,7 @@ export const auth = betterAuth({
  * Sync user with PHP backend
  * Creates or updates user based on OAuth data
  */
-async function syncUserWithPhp(user: any, account: any): Promise<PhpUser> {
+async function syncUserWithPhp(user: BetterAuthUser, account: BetterAuthAccount | null): Promise<PhpUser> {
   const email = user.email;
   const provider = account?.provider || "email";
   const providerId = account?.providerAccountId || user.id;
@@ -183,4 +183,4 @@ async function syncUserWithPhp(user: any, account: any): Promise<PhpUser> {
 /**
  * Export auth handler for API routes
  */
-export const authHandler = auth.handler();
+export const authHandler = auth.handler;
