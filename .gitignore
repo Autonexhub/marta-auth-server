@@ -13,6 +13,10 @@ pnpm-lock.yaml
 dist/
 .vercel/
 .output/
+api/**/*.js
+api/**/*.d.ts
+api/**/*.js.map
+api/**/*.d.ts.map
 
 # IDE
 .vscode/
