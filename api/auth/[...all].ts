@@ -1,4 +1,4 @@
-import { authHandler } from "../../src/auth";
+import { authHandler } from "../auth-config";
 
 /**
  * Vercel Serverless Function
