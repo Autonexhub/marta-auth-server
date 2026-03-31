@@ -1,13 +1,8 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 /**
  * Root endpoint for the auth server
  * Provides basic information and health check
  */
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse
-) {
+export default async function handler(req: any, res: any) {
   // Health check endpoint
   if (req.url === '/health' || req.url === '/api/health') {
     return res.status(200).json({
