@@ -4,7 +4,7 @@
 export default async function handler(req: any, res: any) {
   try {
     // Try to import the auth module
-    const { auth } = await import('../src/auth');
+    const { auth } = await import('./auth-config');
 
     return res.status(200).json({
       status: 'success',
